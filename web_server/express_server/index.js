@@ -12,6 +12,7 @@ let AID = 1
 // CRUD operations
 //add data or (create)
 app.post('/send', (req,res)=>{
+    console.log("POST")
     const {name, phone} = req.body
     const newData = {id:AID++, name, phone}
     Adata.push(newData)
@@ -19,10 +20,12 @@ app.post('/send', (req,res)=>{
 })
 //get all data (read)
 app.get('/send',(req,res)=>{
+    console.log("GET")
     res.status(200).send(Adata)
 })
 //get id data (read)
 app.get('/send/:id',(req,res)=>{
+    console.log("GET_SPECIFIC")
     const find = Adata.find(d=>d.id === parseInt(req.params.id))
     if(!find){
         return res.status(404).send('Data not found')
@@ -31,6 +34,7 @@ app.get('/send/:id',(req,res)=>{
 })
 //update data (update)
 app.put('/send/:id',(req,res)=>{
+    console.log("PUT")
     const find = Adata.find(d=>d.id === parseInt(req.params.id))
     if(!find){
         return res.status(404).send('Data not found')
@@ -42,6 +46,7 @@ app.put('/send/:id',(req,res)=>{
 })
 //delete data (delete)
 app.delete('/send/:id',(req,res)=>{
+    console.log("DELETE")
     const index = Adata.findIndex(d => d.id === parseInt(req.params.id))
     if(index === -1){
         return res.status(404).send('Data not found to delete')
